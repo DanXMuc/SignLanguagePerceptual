@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -98,7 +99,7 @@
   <ItemGroup>
     <Reference Include="libpxcclr.cs">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(PXCCLRPath)</HintPath>
+      <HintPath>.\libpxcclr.cs.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -131,6 +132,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Serialize.cs" />
+    <Compile Include="SignGesture.cs" />
     <Compile Include="timer.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,5 +196,4 @@
     <PostBuildEvent>if "$(Platform)" == "x86" ( copy /y "$(RSSDK_DIR)\bin\win32\libpxccpp2c.dll" "$(TargetDir)" ) else ( copy /y "$(RSSDK_DIR)\bin\x64\libpxccpp2c.dll" "$(TargetDir)" )
 </PostBuildEvent>
   </PropertyGroup>
-  
 </Project>
