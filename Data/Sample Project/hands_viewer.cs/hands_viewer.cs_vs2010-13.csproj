@@ -99,7 +99,7 @@
   <ItemGroup>
     <Reference Include="libpxcclr.cs">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>$(PXCCLRPath)</HintPath>
+      <HintPath>.\libpxcclr.cs.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -133,6 +133,8 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Serialize.cs" />
+    <Compile Include="SignGesture.cs" />
     <Compile Include="timer.cs" />
   </ItemGroup>
   <ItemGroup>
