@@ -5,8 +5,8 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
 
-namespace hands_viewer.cs
-{
+[Serializable()]
+
     class NormalizedHandData
     {
         public PXCMPoint3DF32 middleFingerPositionWorld;
@@ -24,6 +24,7 @@ namespace hands_viewer.cs
             handData.QueryNormalizedJoint(PXCMHandData.JointType.JOINT_CENTER, out j);
             palmPositionWorld = j.positionWorld;
             palmVelocity = j.speed;
+           
         }
     }
-}
+
