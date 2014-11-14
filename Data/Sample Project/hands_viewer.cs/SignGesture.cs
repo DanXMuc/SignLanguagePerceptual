@@ -5,15 +5,15 @@ using System.Runtime.Serialization;
 [Serializable()]
 public class SignGesture : ISerializable
 {
-    string GestureName = "";
-    List<PXCMPoint3DF32> Data = new List<PXCMPoint3DF32>();
+    public string GestureName = "";
+    public List<NormalizedHandData> Data = new List<NormalizedHandData>();
 
     public SignGesture(string GestureName)
     {
         this.GestureName = GestureName;
     }
 
-    public void AddPXCMHandData(PXCMPoint3DF32 data)
+    public void AddPXCMHandData(NormalizedHandData data)
     {
         Data.Add(data);
     }
@@ -21,7 +21,7 @@ public class SignGesture : ISerializable
     public SignGesture(SerializationInfo info, StreamingContext context)
     {
         this.GestureName = (string)info.GetValue("name", typeof(string));
-        this.Data = (List<PXCMPoint3DF32>)info.GetValue("data", typeof(List<PXCMPoint3DF32>));
+        this.Data = (List<NormalizedHandData>)info.GetValue("data", typeof(List<NormalizedHandData>));
     }
 
     public void GetObjectData(SerializationInfo info, StreamingContext context)

@@ -23,6 +23,10 @@ namespace hands_viewer.cs
         [STAThread]
         static void Main()
         {
+
+            Serializer ser = new Serializer();
+            SignGesture gest = ser.DeSerializeObject("blub");
+            Console.WriteLine((float)gest.Data.Last().middleFingerVelocity.x);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 

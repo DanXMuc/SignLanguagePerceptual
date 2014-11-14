@@ -7,7 +7,7 @@ using System.Linq;
 
 [Serializable()]
 
-    class NormalizedHandData
+    public class NormalizedHandData
     {
         public PXCMPoint3DF32 middleFingerPositionWorld;
         public PXCMPoint3DF32 palmPositionWorld;
@@ -16,14 +16,12 @@ using System.Linq;
         public PXCMPoint3DF32 palmVelocity;
 
 
-        NormalizedHandData(PXCMHandData.IHand handData) {
-            PXCMHandData.JointData j;
-            handData.QueryNormalizedJoint(PXCMHandData.JointType.JOINT_MIDDLE_TIP, out j);
-            middleFingerPositionWorld = j.positionWorld;
-            middleFingerVelocity = j.speed;
-            handData.QueryNormalizedJoint(PXCMHandData.JointType.JOINT_CENTER, out j);
-            palmPositionWorld = j.positionWorld;
-            palmVelocity = j.speed;
+        public NormalizedHandData(PXCMPoint3DF32 palmVelocity, PXCMPoint3DF32 palmPositionWorld, PXCMPoint3DF32 middleFingerVelocity, PXCMPoint3DF32 middleFingerPositionWorld)
+        {
+            this.middleFingerPositionWorld = middleFingerPositionWorld;
+            this.middleFingerVelocity = middleFingerVelocity;
+            this.palmPositionWorld = palmPositionWorld;
+            this.palmVelocity = palmVelocity;
            
         }
     }

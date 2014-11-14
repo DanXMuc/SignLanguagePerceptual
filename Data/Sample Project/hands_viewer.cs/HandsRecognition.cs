@@ -54,7 +54,6 @@ namespace hands_viewer.cs
             string gestureStatusRight = string.Empty;
             if (firedGesturesNumber == 0)
             {
-              
                 return;
             }
            
@@ -66,7 +65,7 @@ namespace hands_viewer.cs
                     PXCMHandData.IHand handData;
                     if (handAnalysis.QueryHandDataById(gestureData.handId, out handData) != pxcmStatus.PXCM_STATUS_NO_ERROR)
                         return;
-                   
+
                     PXCMHandData.BodySideType bodySideType = handData.QueryBodySide();
                     if (bodySideType == PXCMHandData.BodySideType.BODY_SIDE_LEFT)
                     {
@@ -267,14 +266,24 @@ namespace hands_viewer.cs
                     //Get hand by time of appearence
                     //PXCMHandAnalysis.HandData handData = new PXCMHandAnalysis.HandData();
                     PXCMHandData.IHand handData;
+
                     if (handOutput.QueryHandData(PXCMHandData.AccessOrderType.ACCESS_ORDER_BY_TIME, i, out handData) == pxcmStatus.PXCM_STATUS_NO_ERROR)
                     {
                         if (handData != null)
                         {
+                            PXCMHandData.JointData k;
+                            handData.QueryTrackedJoint(PXCMHandData.JointType.JOINT_MIDDLE_TIP, out k);
+                            PXCMPoint3DF32 middleFingerPositionWorld = k.positionWorld;
+                            PXCMPoint3DF32 middleFingerVelocity = k.speed;
+                            handData.QueryTrackedJoint(PXCMHandData.JointType.JOINT_CENTER, out k);
+                            PXCMPoint3DF32 palmPositionWorld = k.positionWorld;
+                            PXCMPoint3DF32 palmVelocity = k.speed;
+                            gesture.AddPXCMHandData(new NormalizedHandData(palmVelocity, palmPositionWorld, middleFingerVelocity, middleFingerPositionWorld));
                             //Iterate Joints
                             for (int j = 0; j < 0x20; j++)
                             {
                                 PXCMHandData.JointData jointData;
+
                                 handData.QueryTrackedJoint((PXCMHandData.JointType)j, out jointData);
                                 nodes[i][j] = jointData;
                                 
@@ -546,7 +555,6 @@ namespace hands_viewer.cs
                             if (handData != null)
                             {
                                 frameNumber = liveCamera ? frameCounter : instance.captureManager.QueryFrameIndex();
-
                                 DisplayJoints(handData);
                                 DisplayGesture(handData,frameNumber);
                                 DisplayAlerts(handData, frameNumber);
@@ -578,9 +586,11 @@ namespace hands_viewer.cs
             instance.Dispose();
             if (flag)
             {
-                form.UpdateStatus("Stopped");
+
                 Serializer serializer = new Serializer();
                 serializer.SerializeObject("blub", gesture);
+                form.UpdateStatus("Stopped");
+    
             }
         }
     }
