@@ -33,6 +33,7 @@ namespace hands_viewer.cs
                 Application.Run(new MainForm(session));
                 session.Dispose();
             }
+
         }
     }
 }

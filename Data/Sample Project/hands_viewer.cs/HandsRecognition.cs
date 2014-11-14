@@ -17,6 +17,7 @@ namespace hands_viewer.cs
         private const int NumberOfFramesToDelay = 3;
         private int _framesCounter = 0;
         private float _maxRange;
+        private SignGesture gesture = new SignGesture("name");
        
 
 
@@ -544,7 +545,7 @@ namespace hands_viewer.cs
 
                             if (handData != null)
                             {
-                                frameNumber = liveCamera ? frameCounter : instance.captureManager.QueryFrameIndex(); 
+                                frameNumber = liveCamera ? frameCounter : instance.captureManager.QueryFrameIndex();
 
                                 DisplayJoints(handData);
                                 DisplayGesture(handData,frameNumber);
@@ -578,6 +579,8 @@ namespace hands_viewer.cs
             if (flag)
             {
                 form.UpdateStatus("Stopped");
+                Serializer serializer = new Serializer();
+                serializer.SerializeObject("blub", gesture);
             }
         }
     }
