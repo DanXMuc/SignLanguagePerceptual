@@ -1,0 +1,1 @@
+C:\Program Files (x86)\Intel\RSSDK\framework\CSharp\hands_viewer.cs\bin\x64\Debug\hands_viewer.cs.exe.config
